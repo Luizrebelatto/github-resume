@@ -1,22 +1,26 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
 
-const api: AxiosInstance = axios.create({
-  baseURL: process.env.VUE_APP_API_URL,
-  timeout: 10000,
+const api = axios.create({
+  baseURL: '',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
   }
 });
 
-api.interceptors.response.use(
-  (response: AxiosResponse): AxiosResponse => {
-    return response;
-  }, 
-  (error: AxiosError): Promise<never> => {
-    console.error('Request Error:', error);
-    return Promise.reject(error);
-  }
-);
+export default {
+  get(endpoint) {
+    return api.get(endpoint);
+  },
 
-export default api;
+  post(endpoint, data) {
+    return api.post(endpoint, data);
+  },
+
+  put(endpoint, data) {
+    return api.put(endpoint, data);
+  },
+
+  delete(endpoint) {
+    return api.delete(endpoint);
+  }
+}
