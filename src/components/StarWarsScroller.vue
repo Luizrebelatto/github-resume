@@ -5,7 +5,7 @@
     </section>
 
     <section class="logo-text">
-        <h1>Star Wars</h1>
+        <h1>Github Repositories</h1>
     </section>
 
     <div id="scroller">
