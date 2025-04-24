@@ -1,33 +1,32 @@
 <template>
-
- <div v-if="!repos.length && !loading" class="search">
+    <div v-if="!repos.length && !loading" class="search">
       <input v-model="username" placeholder="Enter an username" />
-      <button @click="buscarRepos">Search</button>
+      <button class="neon-button" @click="buscarRepos">Search</button>
     </div>
 
     <p v-if="loading" class="loading">Loading Repositories...</p>
-  <div v-if="repos.length && !loading">
-    <section class="intro">
-      A long time ago, in a galaxy far,<br> far away....
-    </section>
+    <div v-if="repos.length && !loading">
+      <section class="intro">
+        A long time ago, in a galaxy far,<br> far away....
+      </section>
 
-    <section class="logo-text">
-        <h1>Github Repositories</h1>
-    </section>
+      <section class="logo-text">
+          <h1>Github Repositories</h1>
+      </section>
 
-    <div id="scroller">
-      <div id="content">
-        <p id="title">{{ username }}</p>
-        <br>
-        <p v-for="repo in repos" :key="repo.id">⭐ {{ repo.name }}</p>
+      <div id="scroller">
+        <div id="content">
+          <p id="title">{{ username }}</p>
+          <br>
+          <p v-for="repo in repos" :key="repo.id">{{ repo.name }}</p>
+        </div>
+      </div>
+
+      <div v-for="(star, index) in stars" :key="index"
+          class="stars"
+          :style="{ top: star.top + 'px', left: star.left + 'px' }">
       </div>
     </div>
-
-    <div v-for="(star, index) in stars" :key="index"
-         class="stars"
-         :style="{ top: star.top + 'px', left: star.left + 'px' }">
-    </div>
-  </div>
 </template>
 
 <script setup>
@@ -53,6 +52,7 @@ onMounted(() => {
     stars.value.push(randomPosition())
   }
 })
+
 async function buscarRepos() {
   if (!username.value) return
   loading.value = true
@@ -72,10 +72,13 @@ async function buscarRepos() {
 .search {
   display: flex;
   justify-content: center;
-  margin-top: 20vh;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   gap: 10px;
   z-index: 10;
-  position: relative;
 }
 
 .search input {
@@ -106,5 +109,25 @@ async function buscarRepos() {
   background: white;
   border-radius: 50%;
   z-index: 0;
+}
+
+.neon-button {
+  background-color: #0f0f0f;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+  background-clip: padding-box;
+  transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff;
+  transform: scale(1.05);
 }
 </style>
