@@ -1,29 +1,41 @@
-# github-resume
+## GitHub Resume
 
-This template should help get you started developing with Vue 3 in Vite.
+Website connected to github api with star wars theme
 
-## Recommended IDE Setup
+### 📱 Tech and Libraries
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue
+- Javascript
+- Css
+- Vite
 
-## Customize configuration
+### 👨🏻‍💻 Features
+- Connect with github api
+- Search your user
+- show repositories
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### ▶️ How to Run App
 
-## Project Setup
+**Clone Repo**
 
-```sh
-npm install
+```
+https://github.com/Luizrebelatto/github-resume.git
 ```
 
-### Compile and Hot-Reload for Development
+**Install dependencies**
 
-```sh
-npm run dev
+```
+yarn
 ```
 
-### Compile and Minify for Production
+**Run Application**
 
-```sh
-npm run build
 ```
+yarn start
+```
+
+### 📱 Screenshots
+
+ |              Web               |
+| :----------------------------------------: |
+ | ![](https://github.com/user-attachments/assets/c573ec1f-ef71-4183-a3b8-701fa86344b0) |
