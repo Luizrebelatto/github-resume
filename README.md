@@ -36,6 +36,12 @@ yarn start
 
 ### 📱 Screenshots
 
- |              Web               |
+ |              SearchScreen               |
 | :----------------------------------------: |
  | ![](https://github.com/user-attachments/assets/c573ec1f-ef71-4183-a3b8-701fa86344b0) |
+
+ ### 📱 Video
+
+https://github.com/user-attachments/assets/ff067a4c-843b-47a6-90f5-ded446926014
+
+
