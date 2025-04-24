@@ -2,7 +2,7 @@ import axios from 'axios';
 import { TOKEN_GITHUB } from './variables';
 
 const api = axios.create({
-  baseURL: "https://api.github.com/",
+  baseURL: "https://api.github.com",
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${TOKEN_GITHUB}`
@@ -11,19 +11,7 @@ const api = axios.create({
 });
 
 export default {
-  get(endpoint) {
-    return api.get(endpoint);
+  getUserRepo(username) {
+    return api.get(`/users/${username}/repos`);
   },
-
-  post(endpoint, data) {
-    return api.post(endpoint, data);
-  },
-
-  put(endpoint, data) {
-    return api.put(endpoint, data);
-  },
-
-  delete(endpoint) {
-    return api.delete(endpoint);
-  }
 }
