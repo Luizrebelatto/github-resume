@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <StarWarsScroller />
+    <Home />
   </div>
 </template>
 
 <script setup>
-import StarWarsScroller from './components/StarWarsScroller.vue'
+import Home from './screens/home.vue'
 </script>
 
 <style>
