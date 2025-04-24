@@ -1,4 +1,4 @@
-## GitHub Resume
+## GitHub Resume 🐙
 
 Website connected to github api with star wars theme
 
