@@ -1,10 +1,13 @@
 <template>
     <div v-if="!repos.length && !loading" class="search">
-      <input v-model="username" placeholder="Enter an username" />
+      <input v-model="username" placeholder="Enter an username" class="input"/>
       <button class="neon-button" @click="buscarRepos">Search</button>
     </div>
 
+
     <p v-if="loading" class="loading">Loading Repositories...</p>
+
+   
     <div v-if="repos.length && !loading">
       <section class="intro">
         A long time ago, in a galaxy far,<br> far away....
@@ -129,5 +132,26 @@ async function buscarRepos() {
 .neon-button:hover {
   box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff;
   transform: scale(1.05);
+}
+
+.search input {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+  background-color: #000;
+  color: #00ffff;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+}
+
+.search input::placeholder {
+  color: #888;
+}
+
+.search input:focus {
+  border-color: #ffcc00;
+  box-shadow: 0 0 5px #ffcc00;
 }
 </style>
