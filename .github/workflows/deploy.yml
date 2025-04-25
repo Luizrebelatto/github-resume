@@ -1,0 +1,38 @@
+name: Deploy Vue App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: npm install
+
+      - name: Build project
+        working-directory: ./app
+        run: npm run build
+        env:
+          VUE_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          VUE_APP_TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Deploy to GitHub Pages
+        working-directory: ./app
+        env:
+          VUE_APP_TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          npm install -g gh-pages
+          gh-pages -d dist -r https://x-access-token:${TOKEN_GITHUB}@github.com/${{ github.repository }}.git
