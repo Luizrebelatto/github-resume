@@ -21,15 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build
+      - name: Deploy (envs only)
         env:
           VUE_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
           VUE_APP_TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
-
-      - name: Deploy to GitHub Pages
-        env:
-          VUE_APP_TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
-        run: |
-          npm install -g gh-pages
-          gh-pages -d dist -r https://x-access-token:${TOKEN_GITHUB}@github.com/${{ github.repository }}.git
