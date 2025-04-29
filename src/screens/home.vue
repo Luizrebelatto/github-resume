@@ -1,7 +1,7 @@
 <template>
     <div v-if="!repos.length && !loading" class="search">
       <input v-model="username" placeholder="Enter an username" class="input"/>
-      <button class="neon-button" @click="buscarRepos">Search</button>
+      <button class="neon-button" @click="getRepos">Search</button>
     </div>
 
 
@@ -19,7 +19,7 @@
 
       <div id="scroller">
         <div id="content">
-          <p id="title">{{ username }}</p>
+          <p id="title">{{ userTitle }}</p>
           <br>
           <p v-for="repo in repos" :key="repo.id">{{ repo.name }}</p>
         </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import api from '../services/api.ts'
 
 const stars = ref([])
@@ -56,7 +56,11 @@ onMounted(() => {
   }
 })
 
-async function buscarRepos() {
+const userTitle = computed(() => {
+  return username.value || ''
+})
+
+async function getRepos() {
   if (!username.value) return
   loading.value = true
   try {
