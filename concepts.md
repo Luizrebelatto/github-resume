@@ -203,3 +203,31 @@ watch(username, async (newVal, oldVal) => {
   }
 })
 ```
+
+## Reactive
+- Reactive is fundamental concepts to understand
+- any change you make is reflected in the interface
+```javascript
+<template>
+  <div>
+    <p>{{ user.name }}</p>
+    <p>{{ user.email }}</p>
+    <button @click="changeUserName">Change Name</button>
+  </div>
+</template>
+
+<script setup>
+import { reactive } from 'vue'
+
+const user = reactive({
+  name: 'Gabriel',
+  email: 'gabriel@example.com'
+})
+
+function changeUserName() {
+  user.name = 'Fred'
+  user.email = 'fred@example.com'
+}
+</script>
+
+```
