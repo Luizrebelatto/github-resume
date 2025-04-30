@@ -65,3 +65,15 @@ export default {
 }
 </script>
 ```
+
+## onBeforeMount
+- run before the template is rendered in the DOM.
+- Validate something before render
+```javascript
+onBeforeMount(() => {
+  const savedUsername = localStorage.getItem('github_username')
+  if (savedUsername) {
+    username.value = savedUsername
+  }
+})
+```

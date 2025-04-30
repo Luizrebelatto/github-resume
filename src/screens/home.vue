@@ -4,10 +4,8 @@
       <button class="neon-button" @click="getRepos">Search</button>
     </div>
 
-
     <p v-if="loading" class="loading">Loading Repositories...</p>
 
-   
     <div v-if="repos.length && !loading">
       <section class="intro">
         A long time ago, in a galaxy far,<br> far away....
@@ -33,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, onBeforeMount } from 'vue'
 import api from '../services/api.ts'
 
 const stars = ref([])
@@ -48,6 +46,13 @@ function randomPosition() {
     const y = Math.floor(Math.random() * width)
     return { top: x, left: y }
 }
+
+onBeforeMount(() => {
+  const savedUsername = localStorage.getItem('github_username')
+  if (savedUsername) {
+    username.value = savedUsername
+  }
+})
 
 onMounted(() => {
   const totalStars = 600
