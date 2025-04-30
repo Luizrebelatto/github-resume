@@ -77,3 +77,129 @@ onBeforeMount(() => {
   }
 })
 ```
+
+## onMounted
+- hook after the component has been mounted in the DOM
+- use to search data
+- manipulate dom
+```javascript
+onMounted(() => {
+  const totalStars = 600
+  for (let i = 0; i < totalStars; i++) {
+    stars.value.push(randomPosition())
+  }
+
+  if (username.value) {
+    getRepos()
+  }
+})
+```
+
+# nextTick
+- wait DOM be updated after the first state change
+- after you delete the value inside input, so with nextTick he focus again
+```javascript
+async function getRepos() {
+  if (!username.value) return
+  loading.value = true
+  try {
+    const { data } = await api.getUserRepo(username.value)
+    repos.value = data
+  } catch (error) {
+    alert("❌ Error when searching repositories ❌")
+    repos.value = []
+  } finally {
+    loading.value = false
+    username.value = ''
+    await nextTick()
+    inputRef.value?.focus()
+  }
+}
+```
+
+## getCurrentInstance
+- provides internal access to the current component
+```javascript
+const instance = getCurrentInstance()
+  if (instance) {
+    console.log('Username on mount:', instance.proxy.username)
+  }
+```
+
+## mixin
+- reuse logic between components
+- Mixin isnt supported vue 3
+```javascript
+<script>
+import capitalizeMixin from './mixins/capitalizeMixin';
+
+export default {
+  name: 'formattedName',
+  mixins: [capitalizeMixin],
+  data() {
+    return {
+      nome: "Luiz Gabriel"
+    };
+  },
+  computed: {
+    formattedName() {
+      return this.capitalizeWords(this.name);
+    }
+  }
+}
+</script>
+
+<template>
+  <div>
+    <p>Nome formatted: {{ formattedName }}</p>
+  </div>
+</template>
+```
+
+## defineComponent
+- When not using `<script setup>`
+- export components
+```javascript
+<template>
+  <div>
+    <p>{{ userTitle }}</p>
+  </div>
+</template>
+
+<script>
+import { ref, computed, onMounted, defineComponent } from 'vue'
+import { capitalizeWords } from '../utils/capitalizeWords'
+
+export default defineComponent({
+  setup() {
+    const username = ref('john doe')
+
+    const userTitle = computed(() => {
+      return capitalizeWords(username.value)
+    })
+
+    onMounted(() => {
+      console.log('Mounted')
+    })
+
+    return {
+      username,
+      userTitle,
+    }
+  }
+})
+</script>
+
+```
+
+## Watch
+- observes changes in reactive variables and executes a function when they change.
+- call function getRepos automatic way when username change
+```javascript
+watch(username, async (newVal, oldVal) => {
+  if (newVal !== oldVal && newVal !== '') {
+    loading.value = true
+    await getRepos()
+  }
+})
+```

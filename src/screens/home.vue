@@ -1,6 +1,6 @@
 <template>
     <div v-if="!repos.length && !loading" class="search">
-      <input v-model="username" placeholder="Enter an username" class="input"/>
+      <input ref="inputRef" v-model="username" placeholder="Enter an username" class="input"/>
       <button class="neon-button" @click="getRepos">Search</button>
     </div>
 
@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, onBeforeMount } from 'vue'
+import { ref, onMounted, computed, onBeforeMount, nextTick, watch } from 'vue'
 import api from '../services/api.ts'
 
 const stars = ref([])
@@ -39,10 +39,12 @@ const username = ref('')
 const repos = ref([])
 const loading = ref(false)
 
+const inputRef = ref(null)
+
 function randomPosition() {
     const width = window.innerWidth
     const height = window.innerHeight
-    const x = Math.floor(Math.random() * height) // ← altura
+    const x = Math.floor(Math.random() * height)
     const y = Math.floor(Math.random() * width)
     return { top: x, left: y }
 }
@@ -52,17 +54,6 @@ onBeforeMount(() => {
   if (savedUsername) {
     username.value = savedUsername
   }
-})
-
-onMounted(() => {
-  const totalStars = 600
-  for (let i = 0; i < totalStars; i++) {
-    stars.value.push(randomPosition())
-  }
-})
-
-const userTitle = computed(() => {
-  return username.value || ''
 })
 
 async function getRepos() {
@@ -76,8 +67,33 @@ async function getRepos() {
     repos.value = []
   } finally {
     loading.value = false
+    username.value = ''
+    await nextTick()
+    inputRef.value?.focus()
   }
 }
+
+onMounted(() => {
+  const instance = getCurrentInstance()
+  if (instance) {
+    console.log('Username on mount:', instance.proxy.username)
+  }
+
+  const totalStars = 600
+  for (let i = 0; i < totalStars; i++) {
+    stars.value.push(randomPosition())
+  }
+
+  if (username.value) {
+    getRepos()
+  }
+})
+
+const userTitle = computed(() => {
+  return username.value || ''
+})
+
+
 </script>
 
 <style scoped>
