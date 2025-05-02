@@ -34,6 +34,22 @@ yarn
 yarn start
 ```
 
+**Run unit tests**
+
+#### without details
+```
+yarn vitest
+```
+
+#### with details
+```
+yarn test:unit-all
+```
+
+**Unit Test**
+
+<img width="587" alt="Screenshot 2025-05-01 at 21 01 16" src="https://github.com/user-attachments/assets/6d42a508-3fc4-4c84-854c-9b29892f6cd9" />
+
 ### 📱 Screenshots
 
  |              SearchScreen               |
