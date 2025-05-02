@@ -74,10 +74,10 @@ async function getRepos() {
 }
 
 onMounted(() => {
-  const instance = getCurrentInstance()
-  if (instance) {
-    console.log('Username on mount:', instance.proxy.username)
-  }
+  // const instance = getCurrentInstance()
+  // if (instance) {
+  //   console.log('Username on mount:', instance.proxy.username)
+  // }
 
   const totalStars = 600
   for (let i = 0; i < totalStars; i++) {

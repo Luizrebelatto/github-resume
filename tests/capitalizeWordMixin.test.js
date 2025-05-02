@@ -5,7 +5,7 @@ const capitalizeWords = capitalizeWordMixin.methods.capitalizeWords;
 
 describe('Mixin capitalizeWordMixin', () => {
   it('should capitalize each word correctly', () => {
-    expect(capitalizeWords('hello world')).toBe('Hello Mundo');
+    expect(capitalizeWords('hello world')).toBe('Hello World');
   });
 
   it('should return empty string if input is undefined', () => {
